@@ -1,0 +1,60 @@
+CREATE DATABASE TestBase;
+USE TestBase;
+
+CREATE TABLE Student (
+    id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+    name VARCHAR(50));
+
+CREATE TABLE Subject (
+    id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+    title VARCHAR(50));
+
+CREATE TABLE Teacher (
+    id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+    subjectID INT,
+    FOREIGN KEY (subjectID) REFERENCES Subject(id));
+
+CREATE TABLE Marks (
+    id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+    subjectID INT,
+    studentID INT,
+    mark INT,
+    FOREIGN KEY (subjectID) REFERENCES Subject(id),
+    FOREIGN KEY (studentID) REFERENCES Student(id));
+
+CREATE TABLE StTe (
+    id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+    st INT,
+	te INT,
+	FOREIGN KEY (st) REFERENCES Student(id),
+	FOREIGN KEY (te) REFERENCES Teacher(id)
+);
+INSERT INTO Student (name) VALUES ('Антон');
+INSERT INTO Student (name) VALUES ('Иван');
+INSERT INTO Student (name) VALUES ('Семен');
+INSERT INTO Student (name) VALUES ('Роман');
+
+
+INSERT INTO Subject (title) VALUES ('Химия');
+INSERT INTO Subject (title) VALUES ('Физика');
+
+INSERT INTO Teacher (subjectID) VALUES (1);
+INSERT INTO Teacher (subjectID) VALUES (2);
+
+INSERT INTO Marks (subjectID, studentID, mark) VALUES (1, 1, 5);
+INSERT INTO Marks (subjectID, studentID, mark) VALUES (1, 2, 3);
+INSERT INTO Marks (subjectID, studentID, mark) VALUES (1, 3, 5);
+INSERT INTO Marks (subjectID, studentID, mark) VALUES (1, 4, 4);
+INSERT INTO Marks (subjectID, studentID, mark) VALUES (2, 1, 4);
+INSERT INTO Marks (subjectID, studentID, mark) VALUES (2, 2, 2);
+INSERT INTO Marks (subjectID, studentID, mark) VALUES (2, 3, 5);
+INSERT INTO Marks (subjectID, studentID, mark) VALUES (2, 4, 3);
+
+INSERT INTO StTe (st, te) VALUES (1, 1);
+INSERT INTO StTe (st, te) VALUES (1, 2);
+INSERT INTO StTe (st, te) VALUES (2, 1);
+INSERT INTO StTe (st, te) VALUES (2, 2);
+INSERT INTO StTe (st, te) VALUES (3, 1);
+INSERT INTO StTe (st, te) VALUES (3, 2);
+INSERT INTO StTe (st, te) VALUES (4, 1);
+INSERT INTO StTe (st, te) VALUES (4, 2);
